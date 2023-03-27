@@ -1,8 +1,37 @@
 $.noConflict();
 
-(function ($){
+(async function ($){
 	let format;
 	let currentScrollY;
+
+	const gallery = {
+		currentIndex: null,
+		assets: [],
+	};
+
+	//#region Image Gallery
+	async function loadImagesFromGallery() {
+		
+	}
+
+	function createNewImageElement(imageSrc) {
+		const imageContainer = document.createElement('div');
+		imageContainer.className = 'image';
+		const overlayElement = document.createElement('div');
+		overlayElement.className = 'image-overlay';
+		const imageElement = document.createElement('img');
+		imageElement.className = 'image-asset';
+		imageElement.src = imageSrc;
+		imageElement.onload = () => imageContainer.classList.remove('loading');
+		imageElement.onerror = (e) => console.error(e);
+		imageContainer.append(overlayElement, imageElement);
+		return imageContainer;
+	}
+
+	function reformat(isMobile) {
+		
+	}
+	//#endregion
 
 	//#region Mobile Event Handlers
 	function handleMobileScroll() {
@@ -86,6 +115,7 @@ $.noConflict();
 			}
 			format = 'desktop';
 		}
+		//
 	}
 
 	function setupResponsiveEvents() {
@@ -118,4 +148,5 @@ $.noConflict();
 	}*/
 
 	setupResponsiveEvents();
+	await loadImagesFromGallery();
 })(jQuery);
