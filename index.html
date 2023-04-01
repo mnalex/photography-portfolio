@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Alpine Photography: Home</title>
-		<link rel="icon" type="image/x-icon" href="./images/mobile-logo.png">
+		<link rel="icon" type="image/x-icon" href="./images/favicon.PNG">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
@@ -16,96 +16,82 @@
 		<div id="mbHeader" class="mobile-header">
 			<div class="mobile-nav">
 				<div class="mobile-logo-container">
-					<img class="mobile-logo" src="./images/desktop-logo.png" />
+					<img class="mobile-logo" src="./images/mobile.png" />
 				</div>
 				<button id="mobileMenuButton" class="mobile-menu-toggle">
 					<div class="tpbr"></div>
 					<div class="lrbr"></div>
 				</button>
 			</div>
-			<div id="mbMenu" class="mobile-menu">
-				<ul class="mobile-menu-items root">
-					<li style="flex-flow: column; padding-bottom: 16px;">
-						<a class="menu-item-title">Portfolio</a>
-						<ul class="mobile-menu-items" style="width: 100%">
-							<li class="mobile-menu-link">
-								<button id="btnEvents" class="menu-item-link">Events</button>
-							</li>
-							<li class="mobile-menu-link">
-								<button id="btnLandscapes" class="menu-item-link">Landscapes</a>
-							</li>
-							<li class="mobile-menu-link">
-								<button id="btnPortraits" class="menu-item-link">Portraits</button>
-							</li>
-						</ul>
-					</li>
-					<li id="aboutPageLink">
-						<button id="btnAbout" class="menu-item-link">About</button>
-					</li>
-					<li id="InquirePageLink">
-						<button id="btnInquire" class="menu-item-link">Inquire</button>
-					</li>
-				</ul>
-			</div>
 		</div>
-		<div id="imageViewer" style="display: none;">
-			<!-- Image Viewer -->
+		<div id="mbMenu" class="mobile-menu">
+			<ul class="mobile-menu-items root">
+				<li style="flex-flow: column; padding-bottom: 16px;">
+					<a class="menu-item-title">Portfolio</a>
+					<ul class="mobile-menu-items" style="width: 100%">
+						<li class="mobile-menu-link">
+							<button id="btnEvents" class="menu-item-link">Main Gallery</button>
+						</li>
+						<li class="mobile-menu-link">
+							<button id="btnLandscapes" class="menu-item-link">Portraits</a>
+						</li>
+						<li class="mobile-menu-link">
+							<button id="btnPortraits" class="menu-item-link">Events</button>
+						</li>
+					</ul>
+				</li>
+				<li id="aboutPageLink">
+					<button id="btnAbout" class="menu-item-link">About</button>
+				</li>
+				<li id="InquirePageLink">
+					<button id="btnInquire" class="menu-item-link">Inquire</button>
+				</li>
+			</ul>
+		</div>
+		<div id="imageViewer" style="position: fixed;display: none;flex-flow: column;top: 0;left: 0;right: 0;bottom: 0;z-index: 301;background-color: white;">
+			<div style="
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+">
+				<button id="imageViewerClose" class="mobile-menu-toggle opened">
+					<div class="tpbr"></div>
+					<div class="lrbr"></div>
+				</button>
+			</div>
+			<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+	padding-bottom: 80px;
+">
+</div>
 		</div>
 		<main>
-			<!--<section id="homePage">
-				<div class="image-gallery">
-					 Images go here
-					<div class="col-1">
-						<div class="image loading">
-							<img src="./images/album/test.JPG" />
-						</div>
-					</div>
-					<div class="col-2">
-
-					</div>
-				</div>
-				<footer>
-					<p>&copy; Alpine Photography 2023</p>
-				</footer>
-			</section>
-			<section id="inquirePage"></section>-->
 			<section id="homePage">
-				<div id="gallery" class="image-gallery">
-					<div class="test"></div>
-					<div class="test"></div>
-					<div class="test"></div>
-					<div class="test"></div>
-					<div class="test"></div>
-					<div class="test"></div>
-				</div>
+				<div id="gallery" class="image-gallery"></div>
 			</section>
 			<!--<section id="aboutPage" style="
     padding: 16px 24px;
-    display: flex;display: none;
+    display: flex;
     flex-flow: column;
     align-items: center;
 ">
-				<div style="
-				width: 175px;
-				height: 175px;
-				position: relative;
-				overflow: hidden;
-				border-radius: 50%;
-				margin: 16px;
-				margin-bottom: 32px;
-			">
-			<img src="./images/portrait.png"></div>
 				<p style="
     font-family: 'Roboto Condensed';
-    font-size: 18px;
+    font-size: 16px;
     line-height: 2.2;
     padding-bottom: 24px;
+	font-weight: 300;
 ">
 					My name is Alex and I'm a freelance photographer based in the northwest suburbs of Chicago.
 					I've had the opportunity to travel around the US and the world, capturing photos of breathtaking
-					landscapes, stunning cityscapes, and happy moments that I never want to forget. I believe that
-					a single image has the power to evoke emotions, memories, and stories that last a lifetime, and
-					I started this business to share that value with others.
+					landscapes, stunning cityscapes, and memorable moments with friends. I believe that a single image
+					has the power to evoke emotions, memories, and stories that last a lifetime, and I started this
+					business to share that value with others.
 				</p>
 				<p style="
     font-family: 'Roboto Condensed';
@@ -118,8 +104,8 @@
 					photography, my commitment is delivering high-quality results that exceed your expectations. I
 					love working with people and take delight in creating a comfortable, relaxed atmosphere that
 					allows my clients to be themselves and have fun.
-				</p>
-				<p style="width: 100%;padding-bottom: 16px;font-weight: 600;">What services do I offer?</p>
+				</p>-->
+				<!--<p style="width: 100%;padding-bottom: 16px;font-weight: 600;">What services do I offer?</p>
 				<ul style="
     width: 80%;
     list-style-type: disc;

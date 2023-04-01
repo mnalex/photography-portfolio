@@ -3,33 +3,38 @@ $.noConflict();
 (async function ($){
 	let format;
 	let currentScrollY;
+	let isClosing = false;
 
 	const gallery = {
-		currentIndex: null,
-		assets: [],
+		page: 'main',
+		index: null,
+		assets: {
+			main: [],
+			portraits: [],
+			events: []
+		},
 	};
 
 	//#region Image Gallery
 	async function loadImagesFromGallery() {
-		
-	}
+		const images = ['./images/test.png', './images/test.png', './images/test.png'];
+		for (let index in images)
+		{
+			const imageWrapper = document.createElement('div');
+			imageWrapper.classList.add('image-asset');
 
-	function createNewImageElement(imageSrc) {
-		const imageContainer = document.createElement('div');
-		imageContainer.className = 'image';
-		const overlayElement = document.createElement('div');
-		overlayElement.className = 'image-overlay';
-		const imageElement = document.createElement('img');
-		imageElement.className = 'image-asset';
-		imageElement.src = imageSrc;
-		imageElement.onload = () => imageContainer.classList.remove('loading');
-		imageElement.onerror = (e) => console.error(e);
-		imageContainer.append(overlayElement, imageElement);
-		return imageContainer;
-	}
+			const newImg = new Image();
+			newImg.src = images[index];
+			newImg.onload = async () => {
+				await new Promise(resolve => setTimeout(resolve, 250));
+				imageWrapper.classList.add('loaded');
+			}
 
-	function reformat(isMobile) {
-		
+			imageWrapper.append(newImg);
+			$('#gallery').append(imageWrapper);
+
+			await new Promise(resolve => setTimeout(resolve, 250));
+		}
 	}
 	//#endregion
 
@@ -43,10 +48,9 @@ $.noConflict();
 
 		// Otherwise, show the header if we are scrolling up or hide if we are scrolling down
 		const mobileHeader = $('#mbHeader');
-		const mobileMenu = $('#mbMenu');
 		const newScrollY = window.scrollY;
 
-		if (mobileMenu.hasClass('opened')) {
+		if (mobileHeader.hasClass('opened')) {
 			return;
 		}
 
@@ -66,8 +70,13 @@ $.noConflict();
 	}
 
 	function toggleMobileMenu() {
+		if (!!isClosing) {
+			return;
+		}
+
 		const mbMenuToggle = $('#mobileMenuButton');
 		const mbMenu = $('#mbMenu');
+		const body = $('body');
 
 		if (mbMenuToggle.hasClass("opened")) {
 			mbMenuToggle.removeClass("opened");
@@ -76,9 +85,17 @@ $.noConflict();
 		}
 
 		if (mbMenu.hasClass("opened")) {
+			isClosing = true;
+			mbMenu.addClass("closing");
 			mbMenu.removeClass("opened");
+			setTimeout(() => {
+				mbMenu.removeClass("closing");
+				body.removeClass("scroll-locked");
+				isClosing = false;
+			}, 200);
 		} else {
 			mbMenu.addClass("opened");
+			body.addClass("scroll-locked");
 		}
 	}
 
@@ -115,37 +132,13 @@ $.noConflict();
 			}
 			format = 'desktop';
 		}
-		//
+		// reformat images
 	}
 
 	function setupResponsiveEvents() {
 		$(window).on('resize', handleWindowResize);
 		handleWindowResize();
 	}
-
-	// load images
-	/*const imageGalleryDiv = document.getElementById("images");
-	for (let row = 0; row < 9; row++) {
-		const newDiv = document.createElement("div");
-		newDiv.style.position = "absolute"
-		newDiv.style.backgroundColor = "#f1f1f1";
-		newDiv.style.height = "35vh";
-		newDiv.style.width = "49vw";
-		newDiv.style.left = "0vw";
-		newDiv.style.top = ((row*35) + row) + "vh";
-
-		imageGalleryDiv.appendChild(newDiv);
-
-		const secDiv = document.createElement("div");
-		secDiv.style.position = "absolute"
-		secDiv.style.backgroundColor = "#f1f1f1";
-		secDiv.style.width = "49vw";
-		secDiv.style.height = "35vh";
-		secDiv.style.top = ((row*35) + row) + "vh";
-		secDiv.style.right = "0vw";
-
-		imageGalleryDiv.appendChild(secDiv);
-	}*/
 
 	setupResponsiveEvents();
 	await loadImagesFromGallery();
