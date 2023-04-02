@@ -5,23 +5,27 @@ $.noConflict();
 	let currentScrollY;
 	let isClosing = false, isScrollLocked = false;
 
-	const gallery = {
-		page: 'main',
-		index: null,
-		assets: {
-			main: [],
-			portraits: [],
-			events: []
-		},
-	};
-
 	//#region Image Gallery
 	async function loadImagesFromGallery() {
-		const images = ['./images/test.png', './images/test.png', './images/test.png'];
+		const images = [
+			'./images/album/portrait/p1.png',
+			'./images/album/portrait/p2.png',
+			'./images/album/portrait/p3.png',
+			'./images/album/portrait/p4.png',
+			'./images/album/portrait/p5.png',
+			'./images/album/portrait/p6.png',
+			'./images/album/portrait/p7.png',
+			'./images/album/portrait/p8.png',
+		];
 		for (let index in images)
 		{
 			const imageWrapper = document.createElement('div');
 			imageWrapper.classList.add('image-asset');
+
+			if (index == 3 || index == 5)
+			{
+				imageWrapper.classList.add('large');
+			}
 
 			const newImg = new Image();
 			newImg.src = images[index];
@@ -34,6 +38,10 @@ $.noConflict();
 			$('#gallery').append(imageWrapper);
 
 			await new Promise(resolve => setTimeout(resolve, 250));
+
+			if (index == images.length-1) {
+				$('#ftr').removeClass('hide');
+			}
 		}
 	}
 	//#endregion
@@ -104,11 +112,13 @@ $.noConflict();
 	function registerMobileEventHandlers() {
 		$(window).on('scroll', handleMobileScroll);
 		$('#mobileMenuButton').on('click', toggleMobileMenu);
+		$('#tempBtn').on('click', toggleMobileMenu); // temp
 	}
 
 	function unregisterMobileEventHandlers() {
 		$(window).off('scroll', handleMobileScroll);
 		$('#mobileMenuButton').off('click', toggleMobileMenu);
+		$('#tempBtn').off('click', toggleMobileMenu); // temp
 	}
 
 	//#endregion
