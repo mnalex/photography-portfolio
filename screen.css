@@ -267,7 +267,24 @@ footer > p {
 		margin-bottom: 8px;
 	}
 
+	.image-asset > img {
+		width: 100%;
+	}
+
 	.image-asset.loaded {
 		background-color: white;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	.image-gallery {
+		display: block;
+		line-height: 0;
+		-webkit-column-count: 4;
+		-webkit-column-gap: 8px;
+		-moz-column-count: 4;
+		-moz-column-gap: 8px;
+		column-count: 4;
+		column-gap: 8px;
 	}
 }
