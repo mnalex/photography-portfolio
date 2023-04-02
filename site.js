@@ -3,7 +3,7 @@ $.noConflict();
 (async function ($){
 	let format;
 	let currentScrollY;
-	let isClosing = false;
+	let isClosing = false, isScrollLocked = false;
 
 	const gallery = {
 		page: 'main',
@@ -50,7 +50,7 @@ $.noConflict();
 		const mobileHeader = $('#mbHeader');
 		const newScrollY = window.scrollY;
 
-		if (mobileHeader.hasClass('opened')) {
+		if (mobileHeader.hasClass('opened') || isScrollLocked === true) {
 			return;
 		}
 
@@ -92,10 +92,12 @@ $.noConflict();
 				mbMenu.removeClass("closing");
 				body.removeClass("scroll-locked");
 				isClosing = false;
+				isScrollLocked = false;
 			}, 200);
 		} else {
 			mbMenu.addClass("opened");
 			body.addClass("scroll-locked");
+			isScrollLocked = true;
 		}
 	}
 
